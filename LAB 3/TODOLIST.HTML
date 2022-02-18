@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<head>
+	<title>To Do List</title>
+    <style>
+        *{
+    margin: 0;
+	font-family: sans-serif;
+}
+
+header{
+    background-color: black;
+    color: rgb(214, 208, 208);
+    font-size: 20px;
+    height: 45px;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+h1{
+    margin-left: -80px;
+}
+
+.main{
+    margin-left: 30%;
+	margin-top: 50px;
+}
+
+.input-box{
+    margin-top: 25px;
+}
+
+.input-field{
+    width: 50%;
+	padding-left: 25px;
+	border-radius: 7px;
+	border: 1px solid #dbdbdb;
+	font-size: 16px;
+    height: 35px;
+}
+
+.add-button{
+    height: 38px;
+	margin-left: 15px;
+	border: none;
+	border-radius: 7px;
+	width: 60px;
+	background-color: #3688cf;
+	color: rgb(255, 255, 255);
+}
+
+.tasks{
+    margin: 40px 0px 0px -80px;
+}
+
+.task{
+    width: 59%;
+	height: 30px;
+	border: 1px solid #dbdbdb;
+	padding: 25px;	
+	border-radius: 7px;
+}
+
+.task-checkbox{
+    -webkit-appearance: none;
+	border: 1px solid #cacece;
+	padding: 8px;
+	display: inline;
+	margin: 0px 30px 0px 0px;
+	position: relative;
+	float: left;
+}
+
+.task-checkbox:checked{
+    background-color: #5294E2;
+	border: 1px solid;
+}
+
+.task-checkbox:checked::after{
+    content: '\2714';
+	position: absolute;
+	top: 0px;
+	left: 3px;
+	color: white;
+}
+
+.task-checkbox:checked + span{
+    text-decoration: line-through;
+}
+
+.task-new{
+    border: none;
+	display: inline-block;
+	width: 85%;
+	padding-left: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-decoration: none;
+}
+
+.delete-img{
+    height: 20px;
+	float: right;
+}
+
+.clear-button{
+    height: 38px;
+	margin-left: 5px;
+	border: none;
+	border-radius: 7px;
+	width: 60px;
+	background-color: #ca36cf;
+	color: rgb(255, 255, 255);
+}
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h4>To Do List</h4>
+    </header>
+    <div class="main">
+        <h1>ToDo List</h1>
+        <div class="input-box">
+            <input type="text" class="input-field" placeholder="New Task">
+            <button class="add-button" onclick="addTask()">Add</button>
+            <button class="clear-button" onclick="clearAllTasks()">Clear</button>
+        </div>
+        <div class="tasks">
+            <div class="task">
+                <label class="task-new">
+                    <input type="checkbox" class="task-checkbox">
+                    <span>WebDev lab 3</span>
+                </label>
+                <img class="delete-img" src="https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png"> 
+            </div>
+        </div>
+    </div>
+</body>
+<script>let tasks = document.querySelector('.tasks');
+    let inputText = document.querySelector('.input-field');
+    let addButton = document.querySelector('.add-button');
+    
+    let task = document.querySelectorAll('.task');
+    let deleteImage = document.querySelectorAll('.delete-img');
+    
+    function addTask(){
+        // console.log("ok")                    
+        if(inputText.value != null){
+    
+            let div = document.createElement("div");
+            div.className="task";
+    
+            // console.log(div);
+            let label = document.createElement("label");
+            label.className = "task-new";
+    
+            let check = document.createElement("input");
+            check.type = "checkbox";
+            check.className = "task-checkbox";
+    
+            let span = document.createElement("span");
+            span.innerHTML = inputText.value;
+            // console.log(span.innerHTML)
+    
+            let image = document.createElement("img");
+            image.className = "delete-img";
+            image.src = "https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png";
+            image.addEventListener('click', remove);
+    
+            tasks.appendChild(div);
+            div.appendChild(label);
+            label.appendChild(check);
+            label.appendChild(span);
+            div.appendChild(image);
+    
+            inputText.value = null;
+        }
+    }
+    
+    function remove(){
+        this.parentNode.remove();
+    }
+    
+    function clearAll(){
+        deleteImage[0].addEventListener('click', remove);
+    }
+    
+    function clearAllTasks(){
+        // let btn = document.getElementById('.clear-button');
+        tasks.remove();
+    }
+    
+    clearAll();</script>
+</html>
